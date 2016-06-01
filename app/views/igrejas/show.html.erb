@@ -109,7 +109,9 @@
 
 <div class="text-center">
   <%= link_to 'Listar', igrejas_path, class: 'btn btn-blue' %>
-  <%= link_to 'Editar', edit_igreja_path(@igreja), class: 'btn btn-blue' %>
+  <% if current_user.permissao('permissaoIgreja').alterar? %>
+    <%= link_to 'Editar', edit_igreja_path(@igreja), class: 'btn btn-blue' %>
+  <% end %>
 </div>
 
 </form>

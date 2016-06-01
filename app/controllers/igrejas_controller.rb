@@ -53,6 +53,8 @@ class IgrejasController < ApplicationController
       @igreja.contatos.build(tipo: Contato.tipos[:email])
     end
 
+    authorize @igreja
+
   end
 
   def new
@@ -65,6 +67,7 @@ class IgrejasController < ApplicationController
     @igreja.contatos.build({tipo: Contato.tipos[:telefone]})
     @igreja.contatos.build({tipo: Contato.tipos[:email]})
 
+    authorize @igreja
   end
 
   #TODO MOVER PARA O APPLICATION

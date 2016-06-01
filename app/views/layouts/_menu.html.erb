@@ -10,59 +10,66 @@
     </li>
 
     <!--Igreja-->
-    <li>
-      <%= link_to '#', class: 'menu-dropdown' do %>
-          <%= fa_icon 'home', class: 'menu-icon' %>
-          <span class="menu-text"> Igreja </span>
-          <i class="menu-expand"></i>
-
-      <% end %>
-
-      <ul class="submenu">
-
+    <% if current_user.tem_permissao(['permissaoIgreja']) %>
         <li>
-          <%= link_to igrejas_path, class: 'open-menu' do %>
-              <%= fa_icon 'navicon', class: 'menu-icon' %>
-              <span class="menu-text"> Listar </span>
-          <% end %>
-        </li>
-
-        <li>
-
           <%= link_to '#', class: 'menu-dropdown' do %>
-              <%= fa_icon 'child', class: 'menu-icon' %>
-              <span class="menu-text"> Membros </span>
+              <%= fa_icon 'home', class: 'menu-icon' %>
+              <span class="menu-text"> Igreja </span>
+              <i class="menu-expand"></i>
+
           <% end %>
 
           <ul class="submenu">
 
-            <li>
-
-              <%= link_to membros_path, class: 'open-menu' do %>
-                  <span class="menu-text"> Listar </span>
-              <% end %>
-
-            </li>
-
-            <li>
-              <%= link_to cargos_path, class: 'open-menu' do %>
-                  <span class="menu-text"> Cargos </span>
-              <% end %>
-            </li>
+            <% if not current_user.permissao('permissaoIgreja').nenhuma? %>
+              <li>
+                <%= link_to igrejas_path, class: 'open-menu' do %>
+                    <%= fa_icon 'navicon', class: 'menu-icon' %>
+                    <span class="menu-text"> Listar </span>
+                <% end %>
+              </li>
+            <% end %>
 
             <li>
 
               <%= link_to '#', class: 'menu-dropdown' do %>
-                  <span class="menu-text"> Contribuição </span>
+                  <%= fa_icon 'child', class: 'menu-icon' %>
+                  <span class="menu-text"> Membros </span>
               <% end %>
 
               <ul class="submenu">
 
                 <li>
 
-                  <%= link_to tipo_contribuicoes_path, class: 'open-menu' do %>
-                      <span class="menu-text"> Tipo Contribuição </span>
+                  <%= link_to membros_path, class: 'open-menu' do %>
+                      <span class="menu-text"> Listar </span>
                   <% end %>
+
+                </li>
+
+                <li>
+                  <%= link_to cargos_path, class: 'open-menu' do %>
+                      <span class="menu-text"> Cargos </span>
+                  <% end %>
+                </li>
+
+                <li>
+
+                  <%= link_to '#', class: 'menu-dropdown' do %>
+                      <span class="menu-text"> Contribuição </span>
+                  <% end %>
+
+                  <ul class="submenu">
+
+                    <li>
+
+                      <%= link_to tipo_contribuicoes_path, class: 'open-menu' do %>
+                          <span class="menu-text"> Tipo Contribuição </span>
+                      <% end %>
+
+                    </li>
+
+                  </ul>
 
                 </li>
 
@@ -70,46 +77,42 @@
 
             </li>
 
+
+
+
+            <li>
+              <%= link_to redes_path, class: 'open-menu' do %>
+                  <%= fa_icon 'code-fork', class: 'menu-icon' %>
+                  <span class="menu-text"> Redes </span>
+              <% end %>
+            </li>
+
+            <li>
+              <%= link_to equipes_path, class: 'open-menu' do %>
+                  <%= fa_icon 'users', class: 'menu-icon' %>
+                  <span class="menu-text"> Equipes </span>
+              <% end %>
+            </li>
+
+            <li>
+              <%= link_to sub_equipes_path, class: 'open-menu' do %>
+                  <%= fa_icon 'users', class: 'menu-icon' %>
+                  <span class="menu-text"> Sub Equipes </span>
+              <% end %>
+            </li>
+
+            <li>
+              <%= link_to celulas_path, class: 'open-menu' do %>
+                  <%= fa_icon 'dot-circle-o', class: 'menu-icon' %>
+                  <span class="menu-text"> Celulas </span>
+              <% end %>
+            </li>
+
           </ul>
 
+
         </li>
-
-
-
-
-        <li>
-          <%= link_to redes_path, class: 'open-menu' do %>
-              <%= fa_icon 'code-fork', class: 'menu-icon' %>
-              <span class="menu-text"> Redes </span>
-          <% end %>
-        </li>
-
-        <li>
-          <%= link_to equipes_path, class: 'open-menu' do %>
-              <%= fa_icon 'users', class: 'menu-icon' %>
-              <span class="menu-text"> Equipes </span>
-          <% end %>
-        </li>
-
-        <li>
-          <%= link_to sub_equipes_path, class: 'open-menu' do %>
-              <%= fa_icon 'users', class: 'menu-icon' %>
-              <span class="menu-text"> Sub Equipes </span>
-          <% end %>
-        </li>
-
-        <li>
-          <%= link_to celulas_path, class: 'open-menu' do %>
-              <%= fa_icon 'dot-circle-o', class: 'menu-icon' %>
-              <span class="menu-text"> Celulas </span>
-          <% end %>
-        </li>
-
-      </ul>
-
-
-    </li>
-
+    <% end %>
 
     <!--Relatorios-->
     <li>
