@@ -10,7 +10,7 @@
     </li>
 
     <!--Igreja-->
-    <% if current_user.tem_permissao(['permissaoIgreja']) %>
+    <% if current_user.tem_permissao(['permissaoIgreja', 'permissaoMembro']) %>
         <li>
           <%= link_to '#', class: 'menu-dropdown' do %>
               <%= fa_icon 'home', class: 'menu-icon' %>
@@ -32,48 +32,52 @@
 
             <li>
 
-              <%= link_to '#', class: 'menu-dropdown' do %>
-                  <%= fa_icon 'child', class: 'menu-icon' %>
-                  <span class="menu-text"> Membros </span>
-              <% end %>
-
-              <ul class="submenu">
-
-                <li>
-
-                  <%= link_to membros_path, class: 'open-menu' do %>
-                      <span class="menu-text"> Listar </span>
-                  <% end %>
-
-                </li>
-
-                <li>
-                  <%= link_to cargos_path, class: 'open-menu' do %>
-                      <span class="menu-text"> Cargos </span>
-                  <% end %>
-                </li>
-
-                <li>
-
+              <% if current_user.tem_permissao(['permissaoMembro']) %>
                   <%= link_to '#', class: 'menu-dropdown' do %>
-                      <span class="menu-text"> Contribuição </span>
+                      <%= fa_icon 'child', class: 'menu-icon' %>
+                      <span class="menu-text"> Membros </span>
                   <% end %>
 
                   <ul class="submenu">
 
                     <li>
 
-                      <%= link_to tipo_contribuicoes_path, class: 'open-menu' do %>
-                          <span class="menu-text"> Tipo Contribuição </span>
+                      <% if not current_user.permissao('permissaoMembro').nenhuma? %>
+                          <%= link_to membros_path, class: 'open-menu' do %>
+                              <span class="menu-text"> Listar </span>
+                          <% end %>
                       <% end %>
 
                     </li>
 
+                    <li>
+                      <%= link_to cargos_path, class: 'open-menu' do %>
+                          <span class="menu-text"> Cargos </span>
+                      <% end %>
+                    </li>
+
+                    <li>
+
+                      <%= link_to '#', class: 'menu-dropdown' do %>
+                          <span class="menu-text"> Contribuição </span>
+                      <% end %>
+
+                      <ul class="submenu">
+
+                        <li>
+
+                          <%= link_to tipo_contribuicoes_path, class: 'open-menu' do %>
+                              <span class="menu-text"> Tipo Contribuição </span>
+                          <% end %>
+
+                        </li>
+
+                      </ul>
+
+                    </li>
+
                   </ul>
-
-                </li>
-
-              </ul>
+              <% end %>
 
             </li>
 

@@ -28,6 +28,8 @@ class MembrosController < ApplicationController
 
     @q = Membro.ransack(params[:q])
     @membros = @q.result(distinct: false)
+
+    authorize @membros
   end
 
   def new
@@ -41,6 +43,8 @@ class MembrosController < ApplicationController
     @membro.pessoa.contatos.build(tipo: Contato.tipos[:email])
     @membro.pessoa.contatos.build(tipo: Contato.tipos[:telefone])
     @membro.pessoa.contatos.build(tipo: Contato.tipos[:telefone_comercial])
+
+    authorize @membro
   end
 
   def create
@@ -61,7 +65,7 @@ class MembrosController < ApplicationController
   def edit
     @tela = 'Alterar Membro'
 
-
+    authorize @membro
   end
 
   def update
