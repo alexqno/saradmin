@@ -5,8 +5,10 @@
         <%= link_to membros_path, title: 'Listar Membros', class: 'btn btn-success btn-circle btn-xs' do %>
             <%= fa_icon 'arrow-left' %>
         <% end %>
-        <%= link_to new_membro_contribuicao_path(@membro), title: 'Novo', class: 'btn btn-success btn-circle btn-xs' do %>
-            <%= fa_icon 'plus' %>
+        <% if current_user.permissao('permissaoContribuicao').alterar? %>
+          <%= link_to new_membro_contribuicao_path(@membro), title: 'Novo', class: 'btn btn-success btn-circle btn-xs' do %>
+              <%= fa_icon 'plus' %>
+          <% end %>
         <% end %>
 
         <%= link_to '#', title: 'Imprimir', class: 'btn btn-success btn-circle btn-xs btn-report', data: {action: report_membro_contribuicoes_path(format: 'pdf')} do %>
@@ -31,8 +33,10 @@
                 <td><%= c.tipo_contribuicao.descricao %></td>
                 <td><%= number_to_currency(c.valor) %></td>
                 <td>
-                  <%= link_to edit_membro_contribuicao_path(c.membro, c), title: 'Alterar', class: 'btn btn-default btn-xs icon-only' do %>
-                      <%= fa_icon 'pencil' %>
+                  <% if current_user.permissao('permissaoContribuicao').alterar? %>
+                    <%= link_to edit_membro_contribuicao_path(c.membro, c), title: 'Alterar', class: 'btn btn-default btn-xs icon-only' do %>
+                        <%= fa_icon 'pencil' %>
+                    <% end %>
                   <% end %>
                 </td>
 

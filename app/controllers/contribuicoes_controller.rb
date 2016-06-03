@@ -20,6 +20,8 @@ class ContribuicoesController < ApplicationController
     @membro = Membro.find(params[:membro_id])
 
     @contribuicoes = Contribuicao.where(membro_id: params[:membro_id]).reverse_order
+
+    authorize @contribuicoes
   end
 
   def show
@@ -27,14 +29,15 @@ class ContribuicoesController < ApplicationController
   end
 
   def edit
-
-
+    authorize @contribuicao
   end
 
   def new
     @membro = Membro.find(params[:membro_id])
     @contribuicao = @membro.contribuicaos.build
     @contribuicao.data = Time.new.to_date
+
+    authorize @contribuicao
   end
 
   def create
