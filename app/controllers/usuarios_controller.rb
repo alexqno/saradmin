@@ -7,6 +7,8 @@ class UsuariosController < ApplicationController
     @grupo_opts = Grupo.todos.ativos.collect.map do |g|
       [g.descricao, g.id]
     end
+
+    authorize :usuario
   end
 
   def show
@@ -39,6 +41,8 @@ class UsuariosController < ApplicationController
       end
       @usuario.email = email
     end
+
+    authorize :usuario
 
   end
 
@@ -78,6 +82,8 @@ class UsuariosController < ApplicationController
       [g.descricao, g.id]
     end
     @igrejas = Igreja.all.order(:descricao)
+
+    authorize :usuario
   end
 
   def update
