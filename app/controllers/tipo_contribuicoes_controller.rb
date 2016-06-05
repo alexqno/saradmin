@@ -14,6 +14,8 @@ class TipoContribuicoesController < ApplicationController
     def index
       @tela = 'Listar Tipos de Contribuição'
       @tipo_contribuicoes = TipoContribuicao.all.order(:descricao)
+
+      authorize Contribuicao
     end
 
     def show
@@ -22,11 +24,13 @@ class TipoContribuicoesController < ApplicationController
 
     def edit
       @tela = 'Alterar Tipo de Contribuição'
+      authorize Contribuicao
     end
 
     def new
       @tela = 'Cadastrar Tipo de Contribuição'
       @tipo_contribuicao = TipoContribuicao.new
+      authorize Contribuicao
     end
 
     def create

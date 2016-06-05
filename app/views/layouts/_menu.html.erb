@@ -10,7 +10,7 @@
     </li>
 
     <!--Igreja-->
-    <% if current_user.tem_permissao(['permissaoIgreja', 'permissaoMembro', 'permissaoCargo']) %>
+    <% if current_user.tem_permissao(['permissaoIgreja', 'permissaoMembro', 'permissaoCargo', 'permissaoContribuicao']) %>
         <li>
           <%= link_to '#', class: 'menu-dropdown' do %>
               <%= fa_icon 'home', class: 'menu-icon' %>
@@ -30,7 +30,7 @@
                 </li>
             <% end %>
 
-            <% if current_user.tem_permissao(['permissaoMembro', 'permissaoCargo']) %>
+            <% if current_user.tem_permissao(['permissaoMembro', 'permissaoCargo', 'permissaoContribuicao']) %>
                 <li>
 
                   <%= link_to '#', class: 'menu-dropdown' do %>
@@ -58,25 +58,29 @@
                         </li>
                     <% end %>
 
-                    <li>
-
-                      <%= link_to '#', class: 'menu-dropdown' do %>
-                          <span class="menu-text"> Contribuição </span>
-                      <% end %>
-
-                      <ul class="submenu">
-
+                    <% if current_user.tem_permissao(['permissaoContribuicao']) %>
                         <li>
 
-                          <%= link_to tipo_contribuicoes_path, class: 'open-menu' do %>
-                              <span class="menu-text"> Tipo Contribuição </span>
+                          <%= link_to '#', class: 'menu-dropdown' do %>
+                              <span class="menu-text"> Contribuição </span>
                           <% end %>
 
+                          <ul class="submenu">
+
+                            <% if not current_user.permissao('permissaoContribuicao').nenhuma? %>
+                                <li>
+
+                                  <%= link_to tipo_contribuicoes_path, class: 'open-menu' do %>
+                                      <span class="menu-text"> Tipo Contribuição </span>
+                                  <% end %>
+
+                                </li>
+                            <% end %>
+
+                          </ul>
+
                         </li>
-
-                      </ul>
-
-                    </li>
+                    <% end %>
 
                   </ul>
 
