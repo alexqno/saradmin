@@ -15,6 +15,8 @@ class CargosController < ApplicationController
   def index
     @tela = 'Listar Cargos'
     @cargos = Cargo.all
+
+    authorize @cargos
   end
 
   def show
@@ -23,11 +25,13 @@ class CargosController < ApplicationController
 
   def edit
     @tela = 'Editar Cargo'
+    authorize @cargo
   end
 
   def new
     @tela = 'Cadastrar Cargo'
     @cargo = Cargo.new(lideranca: false)
+    authorize @cargo
   end
 
   def create

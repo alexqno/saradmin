@@ -19,6 +19,8 @@
   </div>
 
   <%= link_to 'Listar', cargos_path, class: 'btn btn-blue' %>
-  <%= link_to 'Editar', edit_cargo_path(@cargo), class: 'btn btn-blue' %>
+  <% if current_user.permissao('permissaoCargo').alterar? %>
+      <%= link_to 'Editar', edit_cargo_path(@cargo), class: 'btn btn-blue' %>
+  <% end %>
 
 </form>

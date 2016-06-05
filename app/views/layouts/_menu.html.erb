@@ -10,7 +10,7 @@
     </li>
 
     <!--Igreja-->
-    <% if current_user.tem_permissao(['permissaoIgreja', 'permissaoMembro']) %>
+    <% if current_user.tem_permissao(['permissaoIgreja', 'permissaoMembro', 'permissaoCargo']) %>
         <li>
           <%= link_to '#', class: 'menu-dropdown' do %>
               <%= fa_icon 'home', class: 'menu-icon' %>
@@ -22,17 +22,17 @@
           <ul class="submenu">
 
             <% if not current_user.permissao('permissaoIgreja').nenhuma? %>
-              <li>
-                <%= link_to igrejas_path, class: 'open-menu' do %>
-                    <%= fa_icon 'navicon', class: 'menu-icon' %>
-                    <span class="menu-text"> Listar </span>
-                <% end %>
-              </li>
+                <li>
+                  <%= link_to igrejas_path, class: 'open-menu' do %>
+                      <%= fa_icon 'navicon', class: 'menu-icon' %>
+                      <span class="menu-text"> Listar </span>
+                  <% end %>
+                </li>
             <% end %>
 
-            <li>
+            <% if current_user.tem_permissao(['permissaoMembro', 'permissaoCargo']) %>
+                <li>
 
-              <% if current_user.tem_permissao(['permissaoMembro']) %>
                   <%= link_to '#', class: 'menu-dropdown' do %>
                       <%= fa_icon 'child', class: 'menu-icon' %>
                       <span class="menu-text"> Membros </span>
@@ -40,21 +40,23 @@
 
                   <ul class="submenu">
 
-                    <li>
+                    <% if not current_user.permissao('permissaoMembro').nenhuma? %>
+                        <li>
 
-                      <% if not current_user.permissao('permissaoMembro').nenhuma? %>
                           <%= link_to membros_path, class: 'open-menu' do %>
                               <span class="menu-text"> Listar </span>
                           <% end %>
-                      <% end %>
 
-                    </li>
+                        </li>
+                    <% end %>
 
-                    <li>
-                      <%= link_to cargos_path, class: 'open-menu' do %>
-                          <span class="menu-text"> Cargos </span>
-                      <% end %>
-                    </li>
+                    <% if not current_user.permissao('permissaoCargo').nenhuma? %>
+                        <li>
+                          <%= link_to cargos_path, class: 'open-menu' do %>
+                              <span class="menu-text"> Cargos </span>
+                          <% end %>
+                        </li>
+                    <% end %>
 
                     <li>
 
@@ -77,9 +79,9 @@
                     </li>
 
                   </ul>
-              <% end %>
 
-            </li>
+                </li>
+            <% end %>
 
 
 
@@ -121,13 +123,11 @@
     <!--Relatorios-->
     <li>
 
-    <li>
-
       <%= link_to '#', class: 'menu-dropdown' do %>
           <%= fa_icon 'file-pdf-o', class: 'menu-icon' %>
           <span class="menu-text"> Relatórios </span>
           <i class="menu-expand"></i>
-    <% end %>
+      <% end %>
 
       <ul class="submenu">
 
@@ -156,8 +156,6 @@
         </li>
 
       </ul>
-
-    </li>
 
     </li>
 
