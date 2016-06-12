@@ -87,15 +87,16 @@
                 </li>
             <% end %>
 
+            <% if policy(:rede).index? %>
 
+                <li>
+                  <%= link_to redes_path, class: 'open-menu' do %>
+                      <%= fa_icon 'code-fork', class: 'menu-icon' %>
+                      <span class="menu-text"> Redes </span>
+                  <% end %>
+                </li>
 
-
-            <li>
-              <%= link_to redes_path, class: 'open-menu' do %>
-                  <%= fa_icon 'code-fork', class: 'menu-icon' %>
-                  <span class="menu-text"> Redes </span>
-              <% end %>
-            </li>
+            <% end %>
 
             <li>
               <%= link_to equipes_path, class: 'open-menu' do %>

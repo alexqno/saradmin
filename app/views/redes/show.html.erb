@@ -20,6 +20,8 @@
   </div>
 
   <%= link_to 'Listar', redes_path, class: 'btn btn-blue' %>
-  <%= link_to 'Editar', edit_rede_path(@rede), class: 'btn btn-blue' %>
+  <% if policy(:rede).edit? %>
+      <%= link_to 'Editar', edit_rede_path(@rede), class: 'btn btn-blue' %>
+  <% end %>
 
 </form>

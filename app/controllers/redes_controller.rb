@@ -39,11 +39,14 @@ class RedesController < ApplicationController
 
   def edit
     @tela = 'Editar Rede'
+    authorize @rede
   end
 
   def new
     @tela = 'Cadastrar Rede'
     @rede = Rede.new
+
+    authorize @rede
   end
 
   def create
