@@ -2,8 +2,10 @@
 
     <div class="form-group">
       <div class="col-sm-12 text-right" style="padding-bottom: 5px">
-        <%= link_to new_equipe_path, title: 'Novo', class: 'btn btn-success btn-circle btn-xs' do %>
-            <%= fa_icon 'plus' %>
+        <% if policy(:equipe).new? %>
+            <%= link_to new_equipe_path, title: 'Novo', class: 'btn btn-success btn-circle btn-xs' do %>
+                <%= fa_icon 'plus' %>
+            <% end %>
         <% end %>
       </div>
       <div class="col-sm-12">
@@ -34,8 +36,10 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to edit_equipe_path(equipe), title: 'Editar', class: 'btn btn-default btn-xs icon-only' do %>
-                      <%= fa_icon 'pencil' %>
+                  <% if policy(:equipe).edit? %>
+                      <%= link_to edit_equipe_path(equipe), title: 'Editar', class: 'btn btn-default btn-xs icon-only' do %>
+                          <%= fa_icon 'pencil' %>
+                      <% end %>
                   <% end %>
                 </td>
               </tr>

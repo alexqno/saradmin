@@ -39,11 +39,13 @@ class EquipesController < ApplicationController
 
   def edit
     @tela = 'Editar Equipe'
+    authorize @equipe
   end
 
   def new
     @tela = 'Cadastrar Equipe'
     @equipe = Equipe.new
+    authorize @equipe
   end
 
   def create

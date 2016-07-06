@@ -6,7 +6,7 @@ class EquipePolicy < ApplicationPolicy
   end
 
   def index?
-    if @user.tem_permissao ['usuarioPodeAcessarTodosOsNiveisDaIgreja']
+    if @user.tem_permissao(['usuarioPodeAcessarTodosOsNiveisDaIgreja']) && @user.tem_permissao(['permissaoEquipe'])
       return true
     else
       membro = Membro.find_by_user_id(@user.id)
@@ -21,5 +21,28 @@ class EquipePolicy < ApplicationPolicy
 
       return false
     end
+  end
+
+  def new?
+    if @user.permissao('permissaoEquipe').alterar?
+      return true
+    else
+      membro = Membro.find_by_user_id(@user.id)
+
+      unless membro.nil?
+        equipes = Equipe.where(id: membro.equipes_ids)
+
+        if equipes.length > 0
+          return true
+        end
+
+      end
+
+      return false
+    end
+  end
+
+  def edit?
+    return new?
   end
 end

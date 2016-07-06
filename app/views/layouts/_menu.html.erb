@@ -98,12 +98,14 @@
 
             <% end %>
 
-            <li>
-              <%= link_to equipes_path, class: 'open-menu' do %>
-                  <%= fa_icon 'users', class: 'menu-icon' %>
-                  <span class="menu-text"> Equipes </span>
-              <% end %>
-            </li>
+            <% if policy(:equipe).index? %>
+                <li>
+                  <%= link_to equipes_path, class: 'open-menu' do %>
+                      <%= fa_icon 'users', class: 'menu-icon' %>
+                      <span class="menu-text"> Equipes </span>
+                  <% end %>
+                </li>
+            <% end %>
 
             <li>
               <%= link_to sub_equipes_path, class: 'open-menu' do %>

@@ -25,6 +25,8 @@
   </div>
 
   <%= link_to 'Listar', equipes_path, class: 'btn btn-blue' %>
-  <%= link_to 'Editar', edit_equipe_path(@equipe), class: 'btn btn-blue' %>
+  <% if policy(:equipe).edit? %>
+      <%= link_to 'Editar', edit_equipe_path(@equipe), class: 'btn btn-blue' %>
+  <% end %>
 
 </form>

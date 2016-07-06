@@ -17,7 +17,6 @@ class RedePolicy < ApplicationPolicy
         if redes.length > 0
           return true
         end
-
       end
 
       return false
